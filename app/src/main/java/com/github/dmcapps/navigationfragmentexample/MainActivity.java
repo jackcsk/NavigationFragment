@@ -2,7 +2,7 @@ package com.github.dmcapps.navigationfragmentexample;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +13,7 @@ import com.github.dmcapps.navigationfragmentexample.v17.NonSupportExamplesActivi
 
 import java.util.ArrayList;
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView mList;
 

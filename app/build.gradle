@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion project.COMPILE_SDK_VERSION as int
+    buildToolsVersion project.BUILD_TOOL_VERSION
 
     defaultConfig {
         applicationId "com.github.dmcapps.navigationfragment"
@@ -33,6 +33,6 @@ dependencies {
     compile supportDependencies.smartTabLayoutCore
     compile supportDependencies.smartTabLayoutUtilsV4
 
-    compile 'com.hkm.slidingmenulib:libmenu:0.4.61'
+    compile 'com.hkm.slidingmenulib:libmenu:0.5.0'
     testCompile 'junit:junit:4.12'
 }
