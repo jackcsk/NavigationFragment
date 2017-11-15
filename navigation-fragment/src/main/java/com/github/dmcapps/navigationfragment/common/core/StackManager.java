@@ -30,6 +30,15 @@ public class StackManager implements Stack {
             transaction.setCustomAnimations(0, 0, 0, 0);
         }
 
+        State state = navigationManager.getState();
+        if (state.getStack().size() >= config.getMinStackSize()) {
+            Object childManagerFragment = navigationManager.getContainer().getNavChildFragmentManager();
+            FragmentManagerWrapper fragmentManagerWrapper = new FragmentManagerWrapper(childManagerFragment);
+
+            Navigation topFragment = (Navigation)fragmentManagerWrapper.findFragmentByTag(state.getStack().peek());
+            transaction.detach(topFragment);
+        }
+
         // Add in the new fragment that we are presenting and add it's navigation tag to the stack.
         transaction.add(config.getPushContainerId(), navFragment, navFragment.getNavTag());
         transaction.addToBackStack(navFragment.getNavTag());
@@ -55,6 +64,16 @@ public class StackManager implements Stack {
 
             if (state.getStack().size() > 0) {
                 navFragment = (Navigation) fragmentManagerWrapper.findFragmentByTag(state.getStack().peek());
+                Object transaction = fragmentManagerWrapper.beginTransaction();
+                if (transaction instanceof android.support.v4.app.FragmentTransaction) {
+                    ((android.support.v4.app.FragmentTransaction) transaction)
+                            .attach((android.support.v4.app.Fragment) navFragment)
+                            .commit();
+                } else if (transaction instanceof android.app.FragmentTransaction) {
+                    ((android.app.FragmentTransaction) transaction)
+                            .attach((android.app.Fragment) navFragment)
+                            .commit();
+                }
             }
         }
         else if (navigationManager.getContainer() != null){

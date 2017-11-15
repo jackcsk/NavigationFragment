@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import java.io.Serializable;
  * create an instance of this fragment.
  */
 public class SampleFragment extends NavigationFragment {
+    private static final String TAG = SampleFragment.class.getSimpleName();
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_FRAG_TEXT = "ARG_FRAG_TEXT";
     private static final String ARG_FRAG_COUNT = "ARG_FRAG_COUNT";
@@ -239,5 +242,17 @@ public class SampleFragment extends NavigationFragment {
             text2 = model.text2;
             text3 = model.text3;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop");
+        super.onStop();
     }
 }
